@@ -1,14 +1,17 @@
 <template>
 <div>
-
-          <div ref="de_titlebar" id="documenteditor_titlebar" class="e-de-ctn-title">
-    <div v-on:keydown="titleBarKeydownEvent" v-on:click="titleBarClickEvent" class="single-line" id="documenteditor_title_contentEditor" title="Document Name. Click or tap to rename this document." contenteditable="false">
-        <label v-on:blur="titleBarBlurEvent" id="documenteditor_title_name" :style="titileStyle" >{{documentName}}</label>
-    </div>    
-    <ejs-button id="de-print" :style="iconStyle" :iconCss="printIconCss" v-on:click.native="printBtnClick" title="Print this document (Ctrl+P).">Print</ejs-button>	
-    <ejs-dropdownbutton ref="de-export" :style="iconStyle" :items="exportItems" :iconCss="exportIconCss" cssClass="e-caret-hide" content="Download" v-bind:select="onExport" :open="openExportDropDown" title="Download this document."></ejs-dropdownbutton>        
-</div>
-//Document editor control creation code
+  <div ref="de_titlebar" id="documenteditor_titlebar" class="e-de-ctn-title">
+    <div v-on:keydown="titleBarKeydownEvent" v-on:click="titleBarClickEvent" class="single-line"
+      id="documenteditor_title_contentEditor" title="Document Name. Click or tap to rename this document."
+      contenteditable="false">
+      <label v-on:blur="titleBarBlurEvent" id="documenteditor_title_name" :style="titileStyle">{{documentName}}</label>
+    </div>
+    <ejs-button id="de-print" :style="iconStyle" :iconCss="printIconCss" v-on:click="printBtnClick"
+      title="Print this document (Ctrl+P).">Print</ejs-button>
+    <ejs-dropdownbutton ref="de-export" :style="iconStyle" :items="exportItems" :iconCss="exportIconCss"
+      cssClass="e-caret-hide" content="Download" v-bind:select="onExport" :open="openExportDropDown"
+      title="Download this document."></ejs-dropdownbutton>
+  </div>
 <ejs-documenteditorcontainer id='container' ref="doceditcontainer" :enableToolbar='true' height="590px"></ejs-documenteditorcontainer>            
         </div>
 
@@ -63,7 +66,6 @@ export default Vue.extend({
             document.getElementById('sfdt').setAttribute('title', 'Download a copy of this document to your computer as an SFDT file.');
         },
         save: function (format) {
-          debugger;
             // tslint:disable-next-line:max-line-length
              this.$refs.doceditcontainer.ej2Instances.documentEditor.save( this.$refs.doceditcontainer.ej2Instances.documentEditor.documentName == '' ? 'sample' :  this.$refs.doceditcontainer.ej2Instances.documentEditor.documentName, format);
         },
@@ -103,56 +105,54 @@ export default Vue.extend({
             document.getElementById("documenteditor_title_name").textContent = obj.documentName ;
             setTimeout(() => { obj.scrollToPage(1); }, 10);
         },
-        updateDocumentEditorSize: function () {
-    //Resizes the document editor component to fit full browser window. (Reduced title bar left padding which is 18)
-    var windowWidth = window.innerWidth -18;
-    //Reducing the size of title bar, to fit Document editor component in remaining height.
-    var windowHeight = window.innerHeight - (document.getElementById("documenteditor_titlebar").offsetHeight +26);
-    this.$refs.doceditcontainer.ej2Instances.resize(windowWidth, windowHeight);
-  },
-  openTemplate: function () {
-
-    var uploadDocument = new FormData();
-    uploadDocument.append('DocumentName', 'Getting Started.docx');
-    var loadDocumentUrl = this.$refs.doceditcontainer.ej2Instances.serviceUrl + 'LoadDocument';
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.open('POST', loadDocumentUrl, true);
-    var dataContext = this;
-    httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState === 4) {
-        if (httpRequest.status === 200 || httpRequest.status === 304) {
-          //Opens the SFDT for the specified file received from the web API.
-          dataContext.$refs.doceditcontainer.ej2Instances.documentEditor.open(httpRequest.responseText);
+        ,
+    updateDocumentEditorSize: function () {
+      //Resizes the document editor component to fit full browser window. (Reduced title bar left padding which is 18)
+      var windowWidth = window.innerWidth -18;
+      //Reducing the size of title bar, to fit Document editor component in remaining height.
+      var windowHeight = window.innerHeight - (document.getElementById("documenteditor_titlebar").offsetHeight +26);
+      this.$refs.doceditcontainer.ej2Instances.resize(windowWidth, windowHeight);
+    },
+    onWindowResize: function () {
+      //Resizes the document editor component to fit full browser window automatically whenever the browser resized.
+      this.updateDocumentEditorSize();
+    },
+    openTemplate: function () {
+      var uploadDocument = new FormData();
+      uploadDocument.append('DocumentName', 'Getting Started.docx');
+      var loadDocumentUrl =
+        this.$refs.doceditcontainer.ej2Instances.serviceUrl + 'LoadDocument';
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.open('POST', loadDocumentUrl, true);
+      var dataContext = this;
+      httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4) {
+          if (httpRequest.status === 200 || httpRequest.status === 304) {
+            //Opens the SFDT for the specified file received from the web API.
+            dataContext.$refs.doceditcontainer.ej2Instances.documentEditor.open(
+              httpRequest.responseText
+            );
+          }
         }
-      }
-    };
-    //Sends the request with template file name to web API. 
-    httpRequest.send(uploadDocument);
-  },
-  onWindowResize: function () {
-    //Resizes the document editor component to fit full browser window automatically whenever the browser resized.
-    this.updateDocumentEditorSize();
-  }
-
-
+      };
+      //Sends the request with template file name to web API.
+      httpRequest.send(uploadDocument);
+    }
     },
     mounted() {
-        this.$nextTick(function () {
-           
-          this.$refs.doceditcontainer.ej2Instances.locale='en-US';
-          var obj = this.$refs.doceditcontainer.ej2Instances.documentEditor;
-          this.$refs.doceditcontainer.ej2Instances.serviceUrl = this.hostUrl + 'api/documenteditor/';
-          
-          this.$refs.doceditcontainer.ej2Instances.documentChange = () => {
-                this.documentChangedEvent();
-            };
-            var obj=this;
-            setTimeout(()=>{
-          obj.updateDocumentEditorSize();
-            },100);
-     window.addEventListener("resize", obj.onWindowResize);
-
-       });
+    this.$nextTick(function () {
+      this.$refs.doceditcontainer.ej2Instances.locale = 'en-US';
+      this.$refs.doceditcontainer.ej2Instances.serviceUrl = this.hostUrl + 'api/documenteditor/';
+      this.$refs.doceditcontainer.ej2Instances.documentChange = () => {
+        this.documentChangedEvent();
+      };
+      var obj = this;
+      setTimeout(() => {
+        obj.updateDocumentEditorSize();
+      }, 100);
+      window.addEventListener('resize', obj.onWindowResize);
+      this.openTemplate();
+    });
     }
 });
 </script>
