@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       serviceUrl:
-        'https://ej2services.syncfusion.com/production/web-services/api/documenteditor/',
+        'https://services.syncfusion.com/vue/production/api/documenteditor/',
       documentName: 'Getting Started',
       documentTitle: 'Untitled Document',
       iconStyle:
