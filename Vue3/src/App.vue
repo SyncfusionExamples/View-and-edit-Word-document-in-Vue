@@ -34,7 +34,7 @@ import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
 import '../node_modules/@syncfusion/ej2-vue-documenteditor/styles/material.css';
 import '../node_modules/@syncfusion/ej2-vue-buttons/styles/material.css';
 import '../node_modules/@syncfusion/ej2-vue-splitbuttons/styles/material.css';
-
+ 
 //Component registeration
 export default {
   name: 'App',
