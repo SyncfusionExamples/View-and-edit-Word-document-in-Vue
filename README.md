@@ -1,14 +1,15 @@
-# View and Edit Word Document in Vue
+# View and Edit Word Document in Vue DOCX Editor (Document Editor)
 
-This repository provides a working example of how to view and edit Word documents in a Vue application using the Syncfusion® Document Editor (a.k.a. Word Processor). It demonstrates seamless Word document (DOCX) editing and rendering directly in the browser, without Microsoft Word or Office interop dependencies. 
+This repository provides a working example of how to view and edit Word documents in a Vue application using the Syncfusion® [Vue DOCX Editor](https://www.syncfusion.com/docx-editor-sdk/Vue-docx-editor?utm_source=github&utm_medium=listing&utm_campaign=github-github-documenteditor-examples) (Document Editor). It demonstrates seamless Word document (DOCX) editing and rendering directly in the browser, without Microsoft Word or Office interop dependencies. 
 
-# Resources 
+# Resources
 
-- **Product page:**   [Syncfusion® Vue Word Processor](https://www.syncfusion.com/vue-components/vue-docx-editor) 
+- **Product page:**   [Syncfusion® Vue DOCX Editor](https://www.syncfusion.com/docx-editor-sdk/Vue-docx-editor?utm_source=github&utm_medium=listing&utm_campaign=github-github-documenteditor-examples) 
 
-- **Documentation:**   [Syncfusion® Word Processor](https://help.syncfusion.com/document-processing/word/word-processor/vue/getting-started) 
+- **Documentation:**   [Syncfusion® Vue DOCX Editor - Documentation](https://help.syncfusion.com/document-processing/word/word-processor/vue/overview?utm_source=github&utm_medium=listing&utm_campaign=github-github-documenteditor-examples) 
 
-- **Online demo:**   [Syncfusion® Word Processor - Demo](https://ej2.syncfusion.com/vue/demos/) 
+- **Online demo:**   [Syncfusion® Vue DOCX Editor - Online demo](https://document.syncfusion.com/demos/docx-editor/vue/#/tailwind3/document-editor/default.html?utm_source=github&utm_medium=listing&utm_campaign=github-github-documenteditor-examples) 
+
 
 # Support and feedback 
 
